@@ -1,0 +1,132 @@
+(lldb) target create "/Applications/Numbers.app/Contents/MacOS/Numbers"
+Current executable set to '/Applications/Numbers.app/Contents/MacOS/Numbers' (x86_64).
+
+(lldb) settings set target.env-vars DYLD_INSERT_LIBRARIES=/usr/lib/libgmalloc.dylib
+
+(lldb) run /Users/test/Library/Containers/com.apple.iWork.Numbers/Data/crash.numbers
+Process 3065 launched: '/Applications/Numbers.app/Contents/MacOS/Numbers' (x86_64)
+
+Numbers[3074:630033] [TSUDefaultCat] Stream read error. errorClass=NSError, domain=NSCocoaErrorDomain, code=259 (Error Domain=NSCocoaErrorDomain Code=259 "The file couldn’t be opened because it isn’t in the correct format." UserInfo={TSUZipArchiveErrorDescription=CRC does not match, TSUIOErrorType=1, TSUZipArchiveErrorEntryName=Index/Tables/Tile-905472.iwa})
+
+Numbers[3074:630033] [TSPPersistenceLogCat] Could not read root object for component [Tables/Tile-905472-905472]. errorClass=NSError, domain=NSCocoaErrorDomain, code=259, hints=[] (Error Domain=NSCocoaErrorDomain Code=259 "The file couldn’t be opened because it isn’t in the correct format." UserInfo={TSUIOErrorType=1, TSPErrorIsTSPError=true})
+
+Numbers[3074:630032] [TSPPersistenceLogCat] Failed to read strongly owned lazy reference <TSPLazyReference: 0x6000021c19f0 unloaded_object=[TSTTableTile-905472] keep_in_memory=YES ownership_mode=strong component=<TSPComponent: 0x600003929860 identifier=905337 locator='CalculationEngine' modified=YES persisted=YES package_identifier=Document component_read_version=0.0.0 component_required_version=0.0.0 can_be_dropped=NO is_wasteful=NO has_ambiguous_ownership=NO required_package_identifier=Unknown>>. errorClass=NSError, domain=NSCocoaErrorDomain, code=259, hints=[ReadFailure] (Error Domain=NSCocoaErrorDomain Code=259 "The file couldn’t be opened because it isn’t in the correct format." UserInfo={TSPErrorHints={(
+    ReadFailure
+)}, TSUIOErrorType=1, TSPErrorIsTSPError=true})
+
+Numbers[3074:630032] [TSPPersistenceLogCat] >>QnREMsQBAAAAAAAA/Td6WFoAAAD/EtlBAgAhARYAAAB0L+Wj4AI/AYldAAUANhZmqS0Kh1K0TySWbtnK4KihWmRQyOIUY6AqxgpklkME9ie2lL0A2bfyoHjUCQemhCeuw6xkKI69gGo0AKeeobgKjRDw1JTUB5c0MkpG4ryBAgKZLjcLzwm6kiNe4sYtn0WC0i+uI+0Ak2lDxO2vv44yLm7bdmH9E3OpzxV+I80tAu+iLlvZCGP9b477WltG7WAQ7dBeAoboVKGTvIS0CdrAz4GH0bAPZtYXZ6WXsvpc5kuNdY9GPfRXx9tS/RJytE76nO7V/i3uW/bm3c49N3ebbJucIw/9UXSF/ezQPFj400npmwJcjIH66qtQR8NxO4VJ4Uo0EpLuWMA1j2gHIJiB66gIfTEBxEhtzOHU7cD0I4gB3o6zxk6iqm/cwYXsaeFFiEKPmgtR3FsNzk2yFj7vz1428azyuc93/VggWb2E8h2lneR/T9Gp+Y4mv9GUSDIvjbisbtQ+Mo/CGXX489dsz8ca69GrCzzj6km27FAP6hTkpnDDO74hrMWVIR3bsRMD3DJ1dgAAAAAAAZ0DwAQAAErtSVSoAAr8AgAAAAAAWVo=<<
+
+Numbers[3074:630032] [TSUAssertCat] #Assert *** Assertion failure #0: -[TSTTableTileGroup _tileForLazyReference:] /Library/Caches/com.apple.xbs/Sources/iWorkDependenciesMacOS/iWorkDependenciesMacOS-7032.0.145/shared/tables/TSTTableTileGroup.mm:64 Failed to load a lazy table tile in TSTTableTileGroup: <TSTTableTileGroup: 0x10b177c00> with error: errorClass=NSError, domain=NSCocoaErrorDomain, code=259, hints=[ReadFailure] (Error Domain=NSCocoaErrorDomain Code=259 "The file couldn’t be opened because it isn’t in the correct format." UserInfo={TSPErrorHints={(
+    ReadFailure
+)}, TSUIOErrorType=1, TSPErrorIsTSPError=true})
+
+Numbers[3074:630032] [TSUAssertCat] #Assert *** Assertion failure #0: Assertion backtrace: >>QnREMqABAAAAAAAA/Td6WFoAAAD/EtlBAgAhARYAAAB0L+Wj4AIfAWddAASANhZDmh9ubhEZIo/jatQ7j12xALnYChQrK1uJQRy0a9U+nu1C1mHr7vAz4M9bffZm77LiM4sn6bvaDM6sODM+WnG7bl4aJqELENa21/2oMoDfwJsYGZrUoLVcFtF8CtQBEbnf2IbM6rbOKV5n65JmIzBlNgYltgimNradQv/hv1OmlVSu1Ui+CMHMu98arOZ6ISbDrruOaFFfB+VkCTG+5Ps3jwmzXPPSA2t7TOqHOh3U/r4tIa2hrtjpffzbTOR09mh6yPFDXo9xZMRU0Bi7sF8YzBvUPDKeWPPaSsn7d36m7iGF2HenWHFJI12mcWnWvGlKmiVNueTAi/WbN/8yfs4hBOCE0l2ewMhnBggBZhE1c8cWcJBZzgsqW/9upoaC6XlpbdUhQKrJmQ3AHdcsdUjvw385j7nN2KlbLAX0f2xXyJ5dks56TbjPt+iIpR0sXaPzOOJEjXnL7paj5iZWlXR/+Ck6AAAAAfsCoAQAAL7fooyoAAr8AgAAAAAAWVo=<<
+
+Process 3074 stopped
+* thread #9, queue = 'NSDocumentController Opening (QOS: UNSPECIFIED)', stop reason = signal SIGABRT
+    frame #0: 0x00007ff811dc9112 libsystem_kernel.dylib`__pthread_kill + 10
+libsystem_kernel.dylib`__pthread_kill:
+->  0x7ff811dc9112 <+10>: jae    0x7ff811dc911c            ; <+20>
+    0x7ff811dc9114 <+12>: movq   %rax, %rdi
+    0x7ff811dc9117 <+15>: jmp    0x7ff811dc32f1            ; cerror_nocancel
+    0x7ff811dc911c <+20>: retq   
+Target 1: (Numbers) stopped.
+
+(lldb) reg read
+General Purpose Registers:
+       rax = 0x0000000000000000
+       rbx = 0x0000700003566000
+       rcx = 0x0000700003564d88
+       rdx = 0x0000000000000000
+       rdi = 0x000000000001520b
+       rsi = 0x0000000000000006
+       rbp = 0x0000700003564db0
+       rsp = 0x0000700003564d88
+        r8 = 0x00000000000004c0
+        r9 = 0x0000000000000020
+       r10 = 0x0000000000000000
+       r11 = 0x0000000000000246
+       r12 = 0x000000000001520b
+       r13 = 0x00006000021c19f0
+       r14 = 0x0000000000000006
+       r15 = 0x0000000000000016
+       rip = 0x00007ff811dc9112  libsystem_kernel.dylib`__pthread_kill + 10
+    rflags = 0x0000000000000246
+        cs = 0x0000000000000007
+        fs = 0x0000000000000000
+        gs = 0x0000000000000000
+
+(lldb) bt
+* thread #9, queue = 'NSDocumentController Opening (QOS: UNSPECIFIED)', stop reason = signal SIGABRT
+  * frame #0: 0x00007ff811dc9112 libsystem_kernel.dylib`__pthread_kill + 10
+    frame #1: 0x00007ff811dff214 libsystem_pthread.dylib`pthread_kill + 263
+    frame #2: 0x00007ff811d4bd10 libsystem_c.dylib`abort + 123
+    frame #3: 0x000000010416e3eb TSTables`___lldb_unnamed_symbol28244$$TSTables + 1968
+    frame #4: 0x000000010416e5c7 TSTables`___lldb_unnamed_symbol28249$$TSTables + 67
+    frame #5: 0x0000000103bf3c74 TSTables`___lldb_unnamed_symbol4463$$TSTables + 122
+    frame #6: 0x0000000103bf7e3c TSTables`___lldb_unnamed_symbol4521$$TSTables + 30
+    frame #7: 0x000000010453391d TSTables`___lldb_unnamed_symbol42283$$TSTables + 684
+    frame #8: 0x0000000103b73427 TSTables`___lldb_unnamed_symbol2668$$TSTables + 182
+    frame #9: 0x0000000103b732da TSTables`___lldb_unnamed_symbol2666$$TSTables + 29
+    frame #10: 0x0000000103b731b9 TSTables`___lldb_unnamed_symbol2664$$TSTables + 65
+    frame #11: 0x00000001042dac51 TSTables`___lldb_unnamed_symbol34471$$TSTables + 52
+    frame #12: 0x00000001042daddb TSTables`___lldb_unnamed_symbol34474$$TSTables + 96
+    frame #13: 0x00000001042e9063 TSTables`___lldb_unnamed_symbol34699$$TSTables + 621
+    frame #14: 0x00000001042e9c6f TSTables`___lldb_unnamed_symbol34707$$TSTables + 276
+    frame #15: 0x00000001042f5b93 TSTables`___lldb_unnamed_symbol34887$$TSTables + 1360
+    frame #16: 0x00000001042f5c60 TSTables`___lldb_unnamed_symbol34889$$TSTables + 23
+    frame #17: 0x0000000103b21df8 TSTables`___lldb_unnamed_symbol1349$$TSTables + 217
+    frame #18: 0x000000010181d66b TSCalculationEngine`TSCEDependencyTracker::registerFormulaOwners() + 523
+    frame #19: 0x00000001018ae35b TSCalculationEngine`TSCECalcEngine::documentDidLoad() + 27
+    frame #20: 0x00000001025f1c5f TSApplication`___lldb_unnamed_symbol1748$$TSApplication + 360
+    frame #21: 0x00000001001fb5a9 Numbers`___lldb_unnamed_symbol9646$$Numbers + 2333
+    frame #22: 0x0000000102ca481d TSApplication`___lldb_unnamed_symbol34987$$TSApplication + 516
+    frame #23: 0x0000000102ca3f6c TSApplication`___lldb_unnamed_symbol34981$$TSApplication + 528
+    frame #24: 0x0000000102c84fea TSApplication`___lldb_unnamed_symbol34543$$TSApplication + 842
+    frame #25: 0x00007ff814c44463 AppKit`-[NSDocumentController makeDocumentWithContentsOfURL:ofType:error:] + 586
+    frame #26: 0x00007ff814e43aa7 AppKit`__97-[NSDocumentController makeDocumentWithContentsOfURL:alternateContents:ofType:completionHandler:]_block_invoke + 91
+    frame #27: 0x00007ff812d0d492 Foundation`__NSBLOCKOPERATION_IS_CALLING_OUT_TO_A_BLOCK__ + 7
+    frame #28: 0x00007ff812d0d38a Foundation`-[NSBlockOperation main] + 98
+    frame #29: 0x00007ff812d0d321 Foundation`__NSOPERATION_IS_INVOKING_MAIN__ + 17
+    frame #30: 0x00007ff812d0c58f Foundation`-[NSOperation start] + 785
+    frame #31: 0x00007ff812d0c265 Foundation`__NSOPERATIONQUEUE_IS_STARTING_AN_OPERATION__ + 17
+    frame #32: 0x00007ff812d0c13a Foundation`__NSOQSchedule_f + 182
+    frame #33: 0x00007ff811c55d0d libdispatch.dylib`_dispatch_block_async_invoke2 + 83
+    frame #34: 0x00007ff811c48cc9 libdispatch.dylib`_dispatch_client_callout + 8
+    frame #35: 0x00007ff811c4b746 libdispatch.dylib`_dispatch_continuation_pop + 460
+    frame #36: 0x00007ff811c4aded libdispatch.dylib`_dispatch_async_redirect_invoke + 716
+    frame #37: 0x00007ff811c583ba libdispatch.dylib`_dispatch_root_queue_drain + 343
+    frame #38: 0x00007ff811c58b5a libdispatch.dylib`_dispatch_worker_thread2 + 160
+    frame #39: 0x00007ff811dfc02e libsystem_pthread.dylib`_pthread_wqthread + 256
+    frame #40: 0x00007ff811dfaffb libsystem_pthread.dylib`start_wqthread + 15
+
+(lldb) dis -s $pc-32 -c 24 -m -F intel
+libsystem_kernel.dylib`proc_rlimit_control:
+    0x7ff811dc90f2 <+2>:  add    dword ptr [rax], eax
+    0x7ff811dc90f4 <+4>:  add    cl, byte ptr [rcx - 0x77]
+    0x7ff811dc90f7 <+7>:  retf   0x50f
+    0x7ff811dc90fa <+10>: jae    0x7ff811dc9104            ; <+20>
+    0x7ff811dc90fc <+12>: mov    rdi, rax
+    0x7ff811dc90ff <+15>: jmp    0x7ff811dc32f1            ; cerror_nocancel
+    0x7ff811dc9104 <+20>: ret    
+    0x7ff811dc9105 <+21>: nop    
+    0x7ff811dc9106 <+22>: nop    
+    0x7ff811dc9107 <+23>: nop    
+
+libsystem_kernel.dylib`__pthread_kill:
+    0x7ff811dc9108 <+0>:  mov    eax, 0x2000148
+    0x7ff811dc910d <+5>:  mov    r10, rcx
+    0x7ff811dc9110 <+8>:  syscall 
+->  0x7ff811dc9112 <+10>: jae    0x7ff811dc911c            ; <+20>
+    0x7ff811dc9114 <+12>: mov    rdi, rax
+    0x7ff811dc9117 <+15>: jmp    0x7ff811dc32f1            ; cerror_nocancel
+    0x7ff811dc911c <+20>: ret    
+    0x7ff811dc911d <+21>: nop    
+    0x7ff811dc911e <+22>: nop    
+    0x7ff811dc911f <+23>: nop    
+
+libsystem_kernel.dylib`setitimer:
+    0x7ff811dc9120 <+0>:  mov    eax, 0x2000053
+    0x7ff811dc9125 <+5>:  mov    r10, rcx
+    0x7ff811dc9128 <+8>:  syscall 
+    0x7ff811dc912a <+10>: jae    0x7ff811dc9134            ; <+20>
