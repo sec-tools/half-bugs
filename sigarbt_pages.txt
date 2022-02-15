@@ -1,0 +1,74 @@
+test@mac ~ % /Applications/Pages.app/Contents/MacOS/Pages /Users/test/Library/Containers/com.apple.iWork.Pages/Data/tmp/sigabrt.pages
+ 16:54:26.559 Pages[76956:22165307] Warning: Column selection is not supported in view-based table and outline views (<TPAnnotationSidebarTableView: 0x7fe77d229000>).
+zsh: abort      /Applications/Pages.app/Contents/MacOS/Pages 
+
+test@mac ~ % lldb /Applications/Pages.app/Contents/MacOS/Pages
+(lldb) target create "/Applications/Pages.app/Contents/MacOS/Pages"
+Current executable set to '/Applications/Pages.app/Contents/MacOS/Pages' (x86_64).
+
+(lldb) run /Users/test/Library/Containers/com.apple.iWork.Pages/Data/tmp/sigabrt.pages
+Process 76960 launched: '/Applications/Pages.app/Contents/MacOS/Pages' (x86_64)
+Pages[76960:22165564] [com.apple.iWork.Pages] copy_read_only: vm_copy failed: status 1.
+Pages[76960:22165564] [TSUCloudKitWebServices] Using production environment for CloudKit public database.
+....
+Pages[76960:22165564] [TSUAssertCat] #Assert *** Assertion failure #0: Assertion backtrace: >>QnREMpgBAAAAAAAA/Td6WFoAAAD/EtlBAgAhARYAAAB0L+Wj4AInAWBdAAOAN+cr9WLfQxcMlGOVjgpdeOT4gfLf5VVsRrt/hKmKYbM7VmjUnMtOhyhyjkpRQd03EolgcOQLbxhmhnurs0Lh4KRP1LEH2pa7cfLUpYtth0HrkR0DCgjgo0TedtxykeraDO+lUO4bdSGHTTBr8ewrzRMWNBxCsGjsam8TXD+DvwTperrkwKY4VbV6YgjIp0NA9L9JOz+NTrSTtvRAOFaKv1MjZ5xH37Kk03tNbv6AyWO/pTaZ5If6I2V1+nlKH+CHWuWRgsrRi1uQHR2wFO6IxpXNj+t/xiylsWacbfWz3Q3BRm9emXlVkfHwHg27MIBlD6WyzQ+kUQyaGSCandKjOIQeDYdhkwIg4R3QpCf5GiGyEDCy5uTEhqBj1MfAq36EmwPV7Y0+fiSH5HqyPHozfAkQNr2P0EE7ST/z9/0VykJf+oC21da9ZrijCncULkQN3cPPzeq+xQypfnUoCgAAAAH0AqgEAACERUC4qAAK/AIAAAAAAFla<<
+Process 76960 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = signal SIGABRT
+    frame #0: 0x00007ff811dc9112 libsystem_kernel.dylib`__pthread_kill + 10
+libsystem_kernel.dylib`__pthread_kill:
+->  0x7ff811dc9112 <+10>: jae    0x7ff811dc911c            ; <+20>
+    0x7ff811dc9114 <+12>: movq   %rax, %rdi
+    0x7ff811dc9117 <+15>: jmp    0x7ff811dc32f1            ; cerror_nocancel
+    0x7ff811dc911c <+20>: retq   
+Target 0: (Pages) stopped.
+
+(lldb) bt
+* thread #1, queue = 'com.apple.main-thread', stop reason = signal SIGABRT
+  * frame #0: 0x00007ff811dc9112 libsystem_kernel.dylib`__pthread_kill + 10
+    frame #1: 0x00007ff811dff214 libsystem_pthread.dylib`pthread_kill + 263
+    frame #2: 0x00007ff811d4bd10 libsystem_c.dylib`abort + 123
+    frame #3: 0x0000000106865138 TSTables`___lldb_unnamed_symbol39580$$TSTables + 2639
+    frame #4: 0x00000001068646e7 TSTables`___lldb_unnamed_symbol39579$$TSTables + 20
+    frame #5: 0x0000000106865684 TSTables`___lldb_unnamed_symbol39590$$TSTables + 82
+    frame #6: 0x0000000106862197 TSTables`___lldb_unnamed_symbol39559$$TSTables + 106
+    frame #7: 0x0000000106a00d6a TSTables`___lldb_unnamed_symbol46630$$TSTables + 290
+    frame #8: 0x0000000106a00c46 TSTables`___lldb_unnamed_symbol46629$$TSTables + 20
+    frame #9: 0x00000001061d011f TSTables`___lldb_unnamed_symbol10393$$TSTables + 1181
+    frame #10: 0x0000000105f85f36 TSTables`___lldb_unnamed_symbol2673$$TSTables + 518
+    frame #11: 0x0000000105f85313 TSTables`___lldb_unnamed_symbol2666$$TSTables + 86
+    frame #12: 0x0000000105f851b9 TSTables`___lldb_unnamed_symbol2664$$TSTables + 65
+    frame #13: 0x0000000106111e80 TSTables`___lldb_unnamed_symbol7635$$TSTables + 681
+    frame #14: 0x0000000106113012 TSTables`___lldb_unnamed_symbol7643$$TSTables + 25
+    frame #15: 0x0000000105f3a5da TSTables`___lldb_unnamed_symbol1417$$TSTables + 32
+    frame #16: 0x00000001078c406a TSApplication`___lldb_unnamed_symbol29464$$TSApplication + 315
+    frame #17: 0x00000001003057cf Pages`___lldb_unnamed_symbol13811$$Pages + 286
+    frame #18: 0x00000001074a5e6d TSApplication`___lldb_unnamed_symbol7613$$TSApplication + 146
+    frame #19: 0x00000001074a57c6 TSApplication`___lldb_unnamed_symbol7602$$TSApplication + 68
+    frame #20: 0x00000001003949bf Pages`___lldb_unnamed_symbol15750$$Pages + 53
+    frame #21: 0x000000010024d512 Pages`___lldb_unnamed_symbol10763$$Pages + 63
+    frame #22: 0x00000001002ffc8f Pages`___lldb_unnamed_symbol13707$$Pages + 760
+    frame #23: 0x00000001002dca0e Pages`___lldb_unnamed_symbol13011$$Pages + 386
+    frame #24: 0x000000010794fde8 TSApplication`___lldb_unnamed_symbol32280$$TSApplication + 486
+    frame #25: 0x00000001002d9df1 Pages`___lldb_unnamed_symbol12974$$Pages + 213
+    frame #26: 0x00007ff814ab3572 AppKit`-[NSWindowController _windowDidLoad] + 548
+    frame #27: 0x00007ff814aaf182 AppKit`-[NSWindowController window] + 110
+    frame #28: 0x000000010797c09f TSApplication`___lldb_unnamed_symbol32833$$TSApplication + 67
+    frame #29: 0x000000010794facf TSApplication`___lldb_unnamed_symbol32278$$TSApplication + 763
+    frame #30: 0x00007ff814ac51f8 AppKit`-[NSDocument addWindowController:] + 225
+    frame #31: 0x00000001079d2b3e TSApplication`___lldb_unnamed_symbol34622$$TSApplication + 98
+    frame #32: 0x00000001079d2967 TSApplication`___lldb_unnamed_symbol34618$$TSApplication + 825
+    frame #33: 0x00007ff814e437c4 AppKit`__80-[NSDocumentController openDocumentWithContentsOfURL:display:completionHandler:]_block_invoke.768 + 150
+    frame #34: 0x00007ff814e4cd69 AppKit`___NSMainRunLoopPerformBlockInModes_block_invoke + 25
+    frame #35: 0x00007ff811ec64a3 CoreFoundation`__CFRUNLOOP_IS_CALLING_OUT_TO_A_BLOCK__ + 12
+    frame #36: 0x00007ff811ec6353 CoreFoundation`__CFRunLoopDoBlocks + 445
+    frame #37: 0x00007ff811ec56b8 CoreFoundation`__CFRunLoopRun + 2586
+    frame #38: 0x00007ff811ec45dd CoreFoundation`CFRunLoopRunSpecific + 563
+    frame #39: 0x00007ff81aaf74f1 HIToolbox`RunCurrentEventLoopInMode + 292
+    frame #40: 0x00007ff81aaf7247 HIToolbox`ReceiveNextEventCommon + 587
+    frame #41: 0x00007ff81aaf6fe5 HIToolbox`_BlockUntilNextEventMatchingListInModeWithFilter + 70
+    frame #42: 0x00007ff8148f3b4c AppKit`_DPSNextEvent + 886
+    frame #43: 0x00007ff8148f21b8 AppKit`-[NSApplication(NSEvent) _nextEventMatchingEventMask:untilDate:inMode:dequeue:] + 1411
+    frame #44: 0x00007ff8148e45a9 AppKit`-[NSApplication run] + 586
+    frame #45: 0x00007ff8148b8447 AppKit`NSApplicationMain + 816
+    frame #46: 0x0000000100044e54 Pages`___lldb_unnamed_symbol1523$$Pages + 33
+    frame #47: 0x00000001018cd4fe dyld`start + 462
